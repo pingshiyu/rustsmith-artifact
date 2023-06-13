@@ -2,10 +2,14 @@ from enum import Enum, auto
 from typing import Dict
 from pathlib import Path
 
-RUST_BUILD_ROOT = Path("/home/jacob/projects/rustsmith/rust-mutcov")
-MUTATED_RUSTC_PATH = (RUST_BUILD_ROOT / "build/x86_64-unknown-linux-gnu/stage1/bin/rustc").as_posix()
-TEMPLATE_SCRIPT_PATH = Path("reducer/shell-script-templates/mutation_detection.sh")
-DEFAULT_REDUCE_ROOT = Path("reducer/reduce/mutations/")
+BUILD_ROOT = Path("/home/jacob/projects/rustsmith/rustsmith-artifact") # Path("/app/artifact")
+RUST_BUILD_ROOT = BUILD_ROOT / "mutated-rustc"
+# MUTATED_RUSTC_PATH = (RUST_BUILD_ROOT / "build/x86_64-unknown-linux-gnu/stage1/bin/rustc").as_posix()
+MUTATED_RUSTC_PATH = "/home/jacob/projects/rustsmith/rust-mutcov/build/x86_64-unknown-linux-gnu/stage1/bin/rustc"
+
+MUT_COVERAGE_EXPERIMENT_ROOT = BUILD_ROOT / "mutation-coverage"
+TEMPLATE_SCRIPT_PATH = MUT_COVERAGE_EXPERIMENT_ROOT / "rustsmith/reducer/mutation_detection.sh"
+DEFAULT_REDUCE_ROOT = MUT_COVERAGE_EXPERIMENT_ROOT / "rustsmith/reducer/reduce"
 MIR_COMPILE_FLAGS = "-Zmir-opt-level=4 -Copt-level=1"
 
 _REMOVED_MUTANTS = [6, 50, 53, 56, 57, 60, 61, 86, 88, 107, 110, 111, 112, 124, 182, 231, 241, 243, 245, 249, 299, 370, 366, 367, 368, 376]

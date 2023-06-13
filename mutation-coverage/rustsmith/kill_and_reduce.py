@@ -9,7 +9,7 @@ import argparse
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="python -m mutation_test.mutation_coverage",
+        prog="python -m rustsmith.kill_and_reduce",
         description="Kill mutants using randomly generated programs as test cases, and reduce the generated test case."
     )
 

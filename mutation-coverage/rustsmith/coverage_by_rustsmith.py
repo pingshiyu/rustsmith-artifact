@@ -7,14 +7,12 @@ import shutil
 import json
 
 from utils import timeout, random_str
-from coverage import MutationContext, check_all
-from settings import Detection, DETECTION_CODE, MUTATED_RUSTC_PATH, TEMPLATE_SCRIPT_PATH, ALL_MUTANTS
+from rustsmith.coverage import MutationContext, check_all
+from settings import Detection, DETECTION_CODE, MUTATED_RUSTC_PATH, TEMPLATE_SCRIPT_PATH, ALL_MUTANTS, BUILD_ROOT
 
 RUSTSMITH_ROOT = Path("/home/jacob/projects/rustsmith")
-RUSTSMITH_PATH = RUSTSMITH_ROOT / "rustsmith/bin/rustsmith"
-DEFAULT_OUT_DIR = (
-    RUSTSMITH_ROOT / "rustsmith-validator-reduce/mutation_test/killing_ground/out"
-)
+RUSTSMITH_PATH = BUILD_ROOT / "rustsmith/bin/rustsmith"
+DEFAULT_OUT_DIR = BUILD_ROOT / "mutation-coverage/rustsmith/out"
 
 _RUSTSMITH_FOLDER_NAME = "_rustsmith"
 _REDUCTION_FOLDER_NAME = "_reduce"
@@ -22,7 +20,7 @@ _REDUCTION_FOLDER_NAME = "_reduce"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="python -m mutation_test.round_robin.rustsmith",
+        prog="python -m rustsmith.coverage_by_rustsmith",
         description="Use RustSmith to massacre mutants.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )

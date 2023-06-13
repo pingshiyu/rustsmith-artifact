@@ -1,2 +1,6 @@
-mutated-rustc/*
-code-coverage/*
+__pycache__
+
+mutated-rustc-/*
+mutated-rustc
+code-coverage-/*
+code-coverage

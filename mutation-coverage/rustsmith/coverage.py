@@ -6,25 +6,8 @@ from multiprocessing import Pool
 import subprocess
 import shutil
 
-from settings import Detection, MIR_COMPILE_FLAGS, get_kill_return_values, return_code_to_detection, COMPILE_TIMEOUT, OUTPUT_TIMEOUT
-from reducer import ReductionEnv, prepare_reduce_folder
-
-
-@dataclass
-class CompilerConfig:
-    version: str
-    flags: str
-    mutation: int = 0
-    compiler_path: str = "rustc"
-
-@dataclass
-class TestCase:
-    v1_config: CompilerConfig
-    v2_config: CompilerConfig
-    path: Path
-    cli_args_path: Optional[Path] = None # default: no args
-    time_limit_compile: float = COMPILE_TIMEOUT
-    time_limit_bin: float = OUTPUT_TIMEOUT
+from settings import Detection, MIR_COMPILE_FLAGS, get_kill_return_values, return_code_to_detection
+from rustsmith.reducer.environment import ReductionEnv, prepare_reduce_folder, TestCase, CompilerConfig
 
 @dataclass(frozen=True, eq=True)
 class MutationContext:
@@ -113,6 +96,8 @@ def check_all(
             n_evaluated += 1
             detected = result.get()
             test_results[context] = detected
+
+            print(context, detected)
 
             if detected == Detection.UNKNOWN:
                 warn(f"Unknown result from: {context}")
