@@ -8,11 +8,11 @@ import json
 
 from utils import timeout, random_str
 from rustsmith.coverage import MutationContext, check_all
-from settings import Detection, DETECTION_CODE, MUTATED_RUSTC_PATH, TEMPLATE_SCRIPT_PATH, ALL_MUTANTS, BUILD_ROOT
+from settings import Detection, DETECTION_CODE, MUTATED_RUSTC_PATH, TEMPLATE_SCRIPT_PATH, ALL_MUTANTS, BUILD_ROOT, MUT_COVERAGE_EXPERIMENT_ROOT
 
 RUSTSMITH_ROOT = Path("/home/jacob/projects/rustsmith")
 RUSTSMITH_PATH = BUILD_ROOT / "rustsmith/bin/rustsmith"
-DEFAULT_OUT_DIR = BUILD_ROOT / "mutation-coverage/rustsmith/out"
+DEFAULT_OUT_DIR = MUT_COVERAGE_EXPERIMENT_ROOT / "_results/rustsmith"
 
 _RUSTSMITH_FOLDER_NAME = "_rustsmith"
 _REDUCTION_FOLDER_NAME = "_reduce"

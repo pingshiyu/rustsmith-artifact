@@ -1,6 +1,9 @@
 __pycache__
+.ipynb_checkpoints
 
 mutated-rustc-/*
 mutated-rustc
 code-coverage-/*
 code-coverage
+mutation-coverage/_results/rustsmith/*
+mutation-coverage/_results/oots/*
