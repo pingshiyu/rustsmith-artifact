@@ -2,7 +2,7 @@
 cmd line interface to check if the {rust-script, compilers} test case demonstrates mutation-differential on mutation x.
 """
 from settings import MUTATED_RUSTC_PATH, MAX_MUTANT, DEFAULT_REDUCE_ROOT, TEMPLATE_SCRIPT_PATH, Detection
-from coverage import check_all, check_single, MutationContext
+from rustsmith.coverage import check_all, check_single, MutationContext
 
 from pathlib import Path
 import argparse

@@ -106,6 +106,4 @@ def prepare_reduce_folder(
     script_path.write_text(script)
     script_path.chmod(script_path.stat().st_mode | 0o111) # chmod +x
 
-    print("folder created:", reduce_folder)
-
     return reduce_folder

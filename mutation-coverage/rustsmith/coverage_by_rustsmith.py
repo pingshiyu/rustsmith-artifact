@@ -279,7 +279,6 @@ def main():
         args.out_dir,
         args.threads,
     )
-    print(kill_setting)
 
     # prepare directories structure
     _prepare_killing_ground(args.mutants, args.out_dir)

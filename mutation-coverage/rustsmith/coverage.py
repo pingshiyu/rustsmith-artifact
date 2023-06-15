@@ -96,9 +96,7 @@ def check_all(
             n_evaluated += 1
             detected = result.get()
             test_results[context] = detected
-
-            print(context, detected)
-
+            
             if detected == Detection.UNKNOWN:
                 warn(f"Unknown result from: {context}")
 
