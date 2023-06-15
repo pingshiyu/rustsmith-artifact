@@ -2,11 +2,6 @@ import shelve
 from pathlib import Path
 from typing import Dict
 
-import pandas as pd
-from collections import Counter
-
-from settings import Detection
-
 def read_results(store_path: Path) -> Dict:
     """
     Reads a coverage Dict of the type:
