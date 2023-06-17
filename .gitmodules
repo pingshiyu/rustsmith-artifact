@@ -1,0 +1,8 @@
+[submodule "mutated-rustc"]
+	path = mutated-rustc
+	url = git@github.com:pingshiyu/rust-mutcov.git
+	branch = mutated-rustc-artifact
+[submodule "code-coverage"]
+	path = code-coverage
+	url = git@github.com:pingshiyu/rust-mutcov.git
+	branch = coverage
