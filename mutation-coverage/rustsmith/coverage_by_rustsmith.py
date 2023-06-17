@@ -283,6 +283,11 @@ def main():
     # prepare directories structure
     _prepare_killing_ground(args.mutants, args.out_dir)
 
+    # ensure rustc is available
+    if not Path(MUTATED_RUSTC_PATH).exists():
+        raise FileNotFoundError(f"Rustc compiler not found within path `{MUTATED_RUSTC_PATH}`. "
+                                 "Ensure it exists first by building `rustc` there.")
+
     # try to kill each mutant
     for mutant in args.mutants:
         coverage = attempt_murder(mutant, kill_setting)
