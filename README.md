@@ -25,22 +25,22 @@ The code coverage experiment can also be replicated using the below instructions
 - The coverage data can then be viewed from the host machine (outside the Docker container) at `localhost:8080`, within the respective `_html` folders.
 
 ### Re-running the code coverage experiments
-- `cd code-coverage` 
-- Clear existing coverage data:
+1. `cd code-coverage` 
+2. Clear existing coverage data:
     - `rm -r coverage/rustsmith/_html/* && rm -r coverage/oots/_html/*`
-- For OOTS:
+3. Code coverage of OOTS:
     - Generate `.profraw` files, for all tests in `mir-opt`, containing coverage information
         - `LLVM_PROFILE_FILE="coverage/oots/%p-%m.profraw" ./x.py test src/test/mir-opt --force-rerun`
     - Generate coverage `html` files
         - `grcov coverage/oots/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/oots/_html`
-- For RustSmith:
+4. Code coverage of RustSmith:
     - Generate 1000 programs:
         - `/app/rustsmith/bin/rustsmith -n 1000 --directory coverage/rustsmith/files`
     - Compile generated programs to generate `.profraw` files:
         - `LLVM_PROFILE_FILE="coverage/rustsmith/%p-%m.profraw" python compile_rustsmith_files.py`
     - Generate coverage `html` files
         - `grcov coverage/rustsmith/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/rustsmith/_html`
-- Viewing the results
+5. Viewing the results
     - Start up a simple Python server for the HTML files on port 8080:
         - `python -m http.server 8080 --bind 0.0.0.0 --directory /app/code-coverage/coverage`
     - The coverage data can then be viewed from the host machine (outside the Docker container) at `localhost:8080`, within the respective `_html` folders.
@@ -48,24 +48,27 @@ The code coverage experiment can also be replicated using the below instructions
 ## Mutation coverage
 `mutation-coverage` contains scripts to replicate the mutation coverage experiment (using the mutated `rustc` contained within `mutated-rustc` folder), for both the _official optimisations test suite_ (OOTS), and for RustSmith.
 
-### First, ensure you are within `mutation-coverage` folder:
+### 1. First, ensure you are within `mutation-coverage` folder:
 ```bash
 cd mutation-coverage
 ```
 
-### Computing the mutation coverage of OOTS
+The optional steps below re-runs the experiments described in the paper, which will take a substantial amount of time. To view the raw results used within the paper, skip the two optional steps.
+
+### 2. (Optional) Computing the mutation coverage of OOTS
 ```bash
 python -m oots.coverage_by_harness
 ```
 This should take around ~20 minutes to evaluate OOTS for all mutants.
 
-### Computing mutation coverage of RustSmith, by executing the experiment described within the paper (identical settings), run:
+### 3. (Optional) Computing mutation coverage of RustSmith, by executing the experiment described within the paper (identical settings), run:
 ```bash
+rm -r _results/rustsmith/*
 python -m rustsmith.coverage_by_rustsmith --minutes-per-mutant 3
 ```
 (Use `--help` option for more instructions on using this script and customise experiments). Running the above experiment will take ~18 hours.
 
-### Compiling the results from the two mutation coverage experiments, and obtain processed results for the paper, run:
+### 4. Compiling the results from the two mutation coverage experiments, and obtain processed results for the paper, run:
 ```bash
 jupyter lab --notebook-dir=/app/mutation-coverage/analysis --ip=0.0.0.0 --port=8888 --allow-root
 ```
