@@ -6,7 +6,7 @@ Artifact for RustSmith tools paper.
 2. `docker build -t rustsmith-artifact .`
 
 # Running the container
-`docker run -it -p 8080:8080 -p 8888:8888 rustsmith-artifact`
+`docker run -it -p 8080:8080 -p 8888:8888 --rm rustsmith-artifact`
 
 # Container contents
 
@@ -57,16 +57,17 @@ cd mutation-coverage
 ```bash
 python -m oots.coverage_by_harness
 ```
+This should take around ~20 minutes to evaluate OOTS for all mutants.
 
 ### Computing mutation coverage of RustSmith, by executing the experiment described within the paper (identical settings), run:
 ```bash
 python -m rustsmith.coverage_by_rustsmith --minutes-per-mutant 3
 ```
-(Use `--help` option for more instructions on using this script and customise experiments)
+(Use `--help` option for more instructions on using this script and customise experiments). Running the above experiment will take ~18 hours.
 
 ### Compiling the results from the two mutation coverage experiments, and obtain processed results for the paper, run:
 ```bash
-jupyter lab --notebook-dir=/app/mutation-coverage/analysis --ip=0.0.0.0 --port=8888
+jupyter lab --notebook-dir=/app/mutation-coverage/analysis --ip=0.0.0.0 --port=8888 --allow-root
 ```
 The notebook can be viewed at `localhost:8888` of the host machine, and to compile together the results, execute the notebook `compile_results.ipynb`.
 

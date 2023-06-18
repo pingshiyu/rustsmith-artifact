@@ -17,7 +17,7 @@ To compile the results from the two mutation coverage experiments, and obtain pr
 ```bash
 bash
 conda activate rustsmith-artifact
-jupyter lab --notebook-dir=analysis --ip=0.0.0.0 --port=8888
+jupyter lab --notebook-dir=/app/mutation-coverage/analysis --ip=0.0.0.0 --port=8888 --allow-root
 ```
 and execute the notebook `read_results.ipynb`
 
