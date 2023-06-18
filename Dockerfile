@@ -29,22 +29,23 @@ COPY .gitmodules /app/.gitmodules
 COPY mutated-rustc /app/mutated-rustc
 WORKDIR /app/mutated-rustc
 ARG RUSTC_MUTATION_NUMBER=0
-RUN ./x.py build -j 8 \
-    && ./x.py test src/test/mir-opt --force-rerun
+## RUN ./x.py build -j 8 \
+##     && ./x.py test src/test/mir-opt --force-rerun
 
 # Building Rustc for code coverage and prepare code coverage tool (grcov)
 COPY code-coverage /app/code-coverage
 WORKDIR /app/code-coverage
-RUN cargo install grcov \
-    && ./x.py build -j 8 \
-    && ./x.py test src/test/mir-opt --force-rerun
+## RUN cargo install grcov \
+##     && ./x.py build -j 8 \
+##     && ./x.py test src/test/mir-opt --force-rerun
 
 # Most time consuming parts are done, now moving onto faster and/or less stable steps
 WORKDIR /app
 
 # Setup python environment for mutation-coverage
 COPY mutation-coverage/environment.yml /app/mutation-coverage/environment.yml
-RUN conda env create -f mutation-coverage/environment.yml
+RUN conda install -n base -c conda-forge mamba \
+    && mamba env create -f mutation-coverage/environment.yml
 
 # Installing Rustc for historical bugs
 RUN rustup install 1.45.0 \
