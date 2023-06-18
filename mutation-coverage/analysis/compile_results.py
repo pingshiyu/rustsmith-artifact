@@ -158,7 +158,7 @@ reliable_strong_kills_idx = rustsmith_rr_strong_df[[Detection.OUTPUT_ERRORS, Det
 reliably_stronger_than_bindiff = reliable_strong_kills_idx[reliable_strong_kills_idx].index
 overall_stronger_kills = rustsmith_not_ots | set(reliably_stronger_than_bindiff)
 
-stronger_kills_df = rustsmith_rr_times_df.loc[overall_stronger_kills, :].drop(columns=[Detection.OUTPUT_TIMEOUT, Detection.COMPILE_TIMEOUT])
+stronger_kills_df = rustsmith_rr_times_df.loc[list(overall_stronger_kills), :].drop(columns=[Detection.OUTPUT_TIMEOUT, Detection.COMPILE_TIMEOUT])
 
 # add kill strength of OTS into the table too
 stronger_kills_mutants = stronger_kills_df.index
