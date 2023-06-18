@@ -15,16 +15,12 @@ python -m rustsmith.coverage_by_rustsmith
 
 To compile the results from the two mutation coverage experiments, and obtain processed results for the paper, run:
 ```bash
-bash
-conda activate rustsmith-artifact
 jupyter lab --notebook-dir=/app/mutation-coverage/analysis --ip=0.0.0.0 --port=8888 --allow-root
 ```
 and execute the notebook `read_results.ipynb`
 
 Alternatively execute the script for outputs to the command line:
 ```bash
-bash
-conda activate rustsmith-artifact
 python -m analysis.compile_results
 ```
 
