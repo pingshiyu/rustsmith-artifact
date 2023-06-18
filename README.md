@@ -68,7 +68,7 @@ python -m rustsmith.coverage_by_rustsmith --minutes-per-mutant 3
 ```bash
 jupyter lab --notebook-dir=/app/mutation-coverage/analysis --ip=0.0.0.0 --port=8888
 ```
-and execute the notebook `read_results.ipynb`
+The notebook can be viewed at `localhost:8888` of the host machine, and to compile together the results, execute the notebook `compile_results.ipynb`.
 
 Alternatively, execute the script for outputs to the command line:
 ```bash
