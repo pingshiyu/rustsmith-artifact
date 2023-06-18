@@ -57,6 +57,7 @@ The optional steps below re-runs the experiments described in the paper, which w
 
 ### 2. (Optional) Computing the mutation coverage of OOTS
 ```bash
+rm _results/oots/store
 python -m oots.coverage_by_harness
 ```
 This should take around ~20 minutes to evaluate OOTS for all mutants.

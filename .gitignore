@@ -1,5 +1,2 @@
 __pycache__
 .ipynb_checkpoints
-
-mutation-coverage/_results/rustsmith/*
-mutation-coverage/_results/oots/*
