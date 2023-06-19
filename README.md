@@ -1,12 +1,10 @@
 # rustsmith-artifact
 Artifact for RustSmith tools paper.
 
-# Obtaining the container
-1. `git submodule update --init --progress`
-2. `docker build -t rustsmith-artifact .`
-
 # Running the container
-`docker run -it -p 8080:8080 -p 8888:8888 --rm rustsmith-artifact`
+```bash
+docker run -it -p 8080:8080 -p 8888:8888 --rm rustsmith-artifact
+```
 
 # Container contents
 
@@ -21,28 +19,46 @@ Artifact for RustSmith tools paper.
 The code coverage experiment can also be replicated using the below instructions.
 
 ### Viewing the full code coverage results as quoted in the paper
-- `python -m http.server 8080 --bind 0.0.0.0 --directory /app/code-coverage/coverage`
-- The coverage data can then be viewed from the host machine (outside the Docker container) at `localhost:8080`, within the respective `_html` folders.
+```bash
+python -m http.server 8080 --bind 0.0.0.0 --directory /app/code-coverage/coverage
+```
+The coverage data can then be viewed from the host machine (outside the Docker container) at `localhost:8080`, within the respective `_html` folders.
 
 ### Re-running the code coverage experiments
-1. `cd code-coverage` 
+1.  ```bash
+    cd code-coverage
+    ``` 
 2. Clear existing coverage data:
-    - `rm -r coverage/rustsmith/_html/* && rm -r coverage/oots/_html/*`
+    ```bash
+    rm -r coverage/rustsmith/_html/* && rm -r coverage/oots/_html/*
+    ```
 3. Code coverage of OOTS:
     - Generate `.profraw` files, for all tests in `mir-opt`, containing coverage information
-        - `LLVM_PROFILE_FILE="coverage/oots/%p-%m.profraw" ./x.py test src/test/mir-opt --force-rerun`
+        ```bash
+        LLVM_PROFILE_FILE="coverage/oots/%p-%m.profraw" ./x.py test src/test/mir-opt --force-rerun
+        ```
     - Generate coverage `html` files
-        - `grcov coverage/oots/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/oots/_html`
+        ```bash
+        grcov coverage/oots/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/    x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/oots/_html
+        ```
 4. Code coverage of RustSmith:
     - Generate 1000 programs:
-        - `/app/rustsmith/bin/rustsmith -n 1000 --directory coverage/rustsmith/files`
+        ```bash
+        /app/rustsmith/bin/rustsmith -n 1000 --directory coverage/rustsmith/files
+        ```
     - Compile generated programs to generate `.profraw` files:
-        - `LLVM_PROFILE_FILE="coverage/rustsmith/%p-%m.profraw" python compile_rustsmith_files.py`
+        ```bash
+        LLVM_PROFILE_FILE="coverage/rustsmith/%p-%m.profraw" python compile_rustsmith_files.py
+        ```
     - Generate coverage `html` files
-        - `grcov coverage/rustsmith/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/rustsmith/_html`
+        ```bash
+        grcov coverage/rustsmith/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/rustsmith/_html
+        ```
 5. Viewing the results
     - Start up a simple Python server for the HTML files on port 8080:
-        - `python -m http.server 8080 --bind 0.0.0.0 --directory /app/code-coverage/coverage`
+        ```bash
+        python -m http.server 8080 --bind 0.0.0.0 --directory /app/code-coverage/coverage
+        ```
     - The coverage data can then be viewed from the host machine (outside the Docker container) at `localhost:8080`, within the respective `_html` folders.
 
 ## Mutation coverage
@@ -95,3 +111,9 @@ cd /app/historical-bugs/v1.61-invalid-opcode
 `killed-mutants-controlled` contains the coverage results quoted for the RustSmith mutant-killing controlled experiment, as described in the paper.
 
 Folders are named after the mutant IDs. If a RustSmith generated file kills the mutant, then the file is saved within a folder named `<KILL_REASON>_<hash>`. Each folder also contains an `info.json` file storing the metadata for the mutant's 3-minute killing round - the type of kill, and the time taken to find the kill within the experiment.
+
+# Building the image from source
+```bash
+git submodule update --init --progress
+docker build -t rustsmith-artifact .
+```
