@@ -39,7 +39,7 @@ The coverage data can then be viewed from the host machine (outside the Docker c
         ```
     - Generate coverage `html` files
         ```bash
-        grcov coverage/oots/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/    x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/oots/_html
+        grcov coverage/oots/*.profraw -s compiler -b /app/code-coverage/build/x86_64-unknown-linux-gnu --llvm-path /app/code-coverage/build/x86_64-unknown-linux-gnu/llvm/bin -t html -o coverage/oots/_html
         ```
 4. Code coverage of RustSmith:
     - Generate 1000 programs:
